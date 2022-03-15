@@ -88,50 +88,60 @@ class StringType
                 i++;
             }
             source[i] = '\0';
-
-            cout << "String 1:: " << source << endl;
-            cout << "String 2:: " << destination << endl;
+            cout << source<<endl;
         }
 
         string concatenate(string s1, string s2)
         {
+            string s3;
             int i = 0;
             while(s1[i] != '\0')
             {
+                s3 += s1[i];
                 i++;
             }
-            s1[i] = 'a';
-            int x = 0;
-            while(s2[x] != '\0')
+            i = 0;
+            while(s2[i] != '\0')
             {
-                s1[i] = s2[x];
-                x++;
+                s3+=s2[i];
                 i++;
             }
-            // s1[i] = '\0';
-            return s1;
+            return s3;
         }
 
         int searchWord(string str, string word)
         {
             if(largerString(str,word) == str)
             {
-                int i = 0,x=0;
+                int i = 0,x=0,match=0,length=0;
+                while(word[length] != '\0')
+                {
+                    length++;
+                }
                 while(str[i] != '\0')
                 {
                     if(str[i] == word[x])
                     {
                         while(word[x] != '\0')
                         {
-                            if(word[x] != str[i])
-                                return false;
+                            if(word[x] == str[i])
+                            {
+                                match++;
+                            }
                             x++;
                             i++;
                         }
+                        x=0;
                     }
+
 
                     i++;
                 }
+                    if(match >= length)
+                        return true;
+                    else
+                        return false;
+
             }
 
             return true;
@@ -156,13 +166,21 @@ class StringType
 int main()
 {
     StringType s;
-    // s.setValues("Affan", "Ali");
-    // s.copy("Afffll", "Ali");
-    cout << s.concatenate("Affan", "Ali");
-    // cout << s.searchChar("Affan", 'n');
-    // cout << s.maxLength();
-    // cout << s.compare("ami", "ali");
-    // s.printValues();
+    s.setValues("first string", "second string");
+    s.printValues();
+    cout << "\nMax Length is " << s.maxLength() <<endl<<endl;
+    cout << "The bigger string is " << s.compare("str1","check")<<endl<<endl;
+    s.copy("This", "copy");
+    cout<<endl;
+    if(s.searchWord("This is a new string", "new") == true)
+        cout << "Word is available in string\n";
+    else
+        cout << "Word is not available in string\n";
+    cout<<endl;
+    cout << s.concatenate("new ", "string") <<endl<<endl;
+    if(s.searchChar("string", 'i') == true)
+        cout << "Character is availabe in string\n";
+    else
+        cout << "Character is not available in string\n";
     return 0;
 }
-
